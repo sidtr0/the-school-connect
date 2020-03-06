@@ -33,7 +33,7 @@
         </v-list-item-content>
 
         <v-card-actions>
-          <v-btn class="darker" elevation="0" v-on:click="login">Log In</v-btn>
+          <v-btn class="darker" elevation="0" @click="signIn">Sign In</v-btn>
         </v-card-actions>
       </v-list-item>
     </v-card>
@@ -41,16 +41,25 @@
 </template>
 
 <script>
+const fb = require('../firebase.js');
+
 export default {
   name: "SignIn",
   components: {},
   data() {
     return {
-      signInForm: {
         email: null,
         password: null
-      }
-    };
+    }
+  },
+  methods: {
+    signIn: function () {
+      fb.auth.signInWithEmailAndPassword(this.email, this.password)
+        .catch(function(error) {
+            alert("We found an error\n" + error.code + "\n" + error.message)
+      })
+      this.$router.push('/dashboard');
+    }
   }
 };
 </script>

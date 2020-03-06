@@ -46,30 +46,32 @@
 </template>
 
 <script>
-const fb = require('../firebase.js');
+const fb = require("../firebase.js");
 
 export default {
   name: "SignUp",
   components: {},
   data() {
     return {
-        username: null,
-        email: null,
-        password: null
-    }
+      username: null,
+      email: null,
+      password: null
+    };
   },
   methods: {
-    signUp: function () {
+    signUp: function() {
       // console.log(this.username);
       // console.log(this.email);
       // console.log(this.password);
 
-      fb.auth.createUserWithEmailAndPassword(this.email, this.password)
+      fb.auth
+        .createUserWithEmailAndPassword(this.email, this.password)
         .catch(function(error) {
-          var errorCode = error.code;
-          var errorMsg = error.message;
-          console.log(errorCode + "\n" + errorMsg);
-        })
+          alert(
+            "We found an error\n" + error.code + "\n" + error.message
+          )
+        });
+        this.$router.push('/dashboard');
     }
   }
 };

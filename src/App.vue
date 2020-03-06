@@ -22,7 +22,7 @@
           <v-icon left>mdi-account</v-icon>
           Sign In
         </v-btn>
-        <v-btn depressed large class="primary" v-on:click="logout">
+        <v-btn depressed large class="primary" @click="signOut">
           Sign Out
         </v-btn>
       </v-toolbar-items>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+const fb = require('./firebase.js')
+
 export default {
   name: "App",
 
@@ -46,6 +48,17 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
+
+  methods: {
+    signOut: function () {
+      fb.auth.signOut()
+      .catch(function(error) {
+        // An error happened.
+        alert("We found an error\n" + error.code + "\n" + error.message);
+      });
+      this.$router.push('/')
+    }
+  }
 };
 </script>
