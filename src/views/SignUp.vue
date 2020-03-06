@@ -30,7 +30,7 @@
             type="password"
             v-model="password"
           ></v-text-field>
-          <router-link to="/login"
+          <router-link to="/signin"
             >Already have an account? Login instead.</router-link
           >
         </v-list-item-content>

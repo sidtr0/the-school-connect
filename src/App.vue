@@ -30,6 +30,10 @@
 
     <v-content>
       <router-view />
+      <v-footer class="primary">
+        <v-spacer></v-spacer>
+        <div>&copy; {{ new Date().getFullYear() }} The School Connect</div>
+      </v-footer>
     </v-content>
   </v-app>
 </template>

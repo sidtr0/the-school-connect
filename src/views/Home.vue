@@ -18,61 +18,44 @@
       </p>
     </div>
     <v-divider></v-divider>
+
     <v-row>
-      <v-col cols="12" sm="12">
-        <v-card max-width="1200" elevation=5 color="quadranary">
-          <v-col>
-            <v-card-title>
-              <v-icon color="primary"> </v-icon>
-            </v-card-title>
-            <v-card-subtitle>
-              <span class="font-weight-heavy"> </span>
-            </v-card-subtitle>
-            <v-card-text>
-              
-            </v-card-text>
-          </v-col>
-        </v-card> 
+      <v-col cols="12" sm="4">
+        <v-card max-width="400" height="270">
+          <v-img
+            height="200"
+            src="../assets/two-women-looking-and-pointing-at-macbook-laptop-1569076.jpg"
+          ></v-img>
+          <v-card-text>
+            Stay connected with weekly updates, discussions, and content.
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-card max-width="400" height="270">
+          <v-img
+            height="200"
+            src="../assets/group-of-people-inside-room-2962059.jpg"
+          ></v-img>
+          <v-card-text>
+            Discuss, chat and debate with students all over the world.
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-card max-width="400" height="270">
+          <v-img
+            height="200"
+            src="../assets/books-piled-up-on-the-table-3747502.jpg"
+          ></v-img>
+          <v-card-text>
+            Get latest posts on topics you love.
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12" sm="12">
-          <v-card max-height="1200" elevation=5 color="quadranary">
-            <v-col>
-              <v-card-title>
-                <v-icon color="primary"> </v-icon>
-              </v-card-title>
-              <v-card-subtitle>
-                <span class="font-weight-heavy"> </span>
-              </v-card-subtitle>
-              <v-card-text>
-                
-              </v-card-text>
-              
-              
-            </v-col>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="12">
-          <v-card max-height="1200" elevation=5 color="quadranary">
-            <v-col>
-              <v-card-title>
-                <v-icon color="primary"></v-icon>
-              </v-card-title>
-              <v-card-subtitle>
-                <span class="font-weight-heavy"></span>
-              </v-card-subtitle>
-              <v-card-text>
-                
-              </v-card-text>
-              
-              
-            </v-col>
-          </v-card>
-        </v-col>
-      </v-row>
+
+    
   </v-container>
 </template>
 
