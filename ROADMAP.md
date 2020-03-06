@@ -6,3 +6,6 @@ In the future releases, the following updates are planned.
 
 # 1
 Adding of seperate "sub-reddit"-like pages for different communities.
+
+# 2
+Allow users to change settings.

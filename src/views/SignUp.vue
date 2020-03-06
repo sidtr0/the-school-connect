@@ -17,18 +17,18 @@
           <v-text-field
             name="Username"
             label="Username"
-            v-model="username"
+            v-model.lazy="username"
           ></v-text-field>
           <v-text-field
             name="Email"
             label="Email"
-            v-model="email"
+            v-model.lazy="email"
           ></v-text-field>
           <v-text-field
             name="password"
             label="Password"
             type="password"
-            v-model="password"
+            v-model.lazy="password"
           ></v-text-field>
           <router-link to="/signin"
             >Already have an account? Login instead.</router-link
@@ -36,9 +36,9 @@
         </v-list-item-content>
 
         <v-card-actions>
-          <v-btn class="darker" elevation="1" v-on:click="signUp"
-            >Sign Up</v-btn
-          >
+          <v-btn class="darker" elevation="1" @click="signUp">
+            Sign Up
+          </v-btn>
         </v-card-actions>
       </v-list-item>
     </v-card>
@@ -46,17 +46,31 @@
 </template>
 
 <script>
+const fb = require('../firebase.js');
+
 export default {
   name: "SignUp",
   components: {},
   data() {
     return {
-      signUpForm: {
         username: null,
         email: null,
         password: null
-      }
-    };
+    }
+  },
+  methods: {
+    signUp: function () {
+      // console.log(this.username);
+      // console.log(this.email);
+      // console.log(this.password);
+
+      fb.auth.createUserWithEmailAndPassword(this.email, this.password)
+        .catch(function(error) {
+          var errorCode = error.code;
+          var errorMsg = error.message;
+          console.log(errorCode + "\n" + errorMsg);
+        })
+    }
   }
 };
 </script>
