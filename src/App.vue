@@ -4,9 +4,11 @@
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>
-        <span class="grey--text text--lighten-2 display-1">THE</span>
-        <span class="black--text text--lighten-2 display-1">SCHOOL</span>
-        <span class="grey--text text--lighten-2 display-1">CONNECT</span>
+        <router-link to="/">
+          <span class="grey--text text--lighten-2 display-1">THE</span>
+          <span class="black--text text--lighten-2 display-1">SCHOOL</span>
+          <span class="grey--text text--lighten-2 display-1">CONNECT</span>
+        </router-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
