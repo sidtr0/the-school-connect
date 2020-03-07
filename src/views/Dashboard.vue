@@ -34,12 +34,15 @@
     </v-card>
     <br />
     <span class="display-2 text-center">Latest Posts</span>
-    <v-btn @click="getDocs">text</v-btn>
+    <!--<v-btn @click="getDocs">text</v-btn>-->
     <v-container v-for="post in posts" :key="post.title">
       <v-card>
         <v-card-title>
           {{  post.title  }}
         </v-card-title>
+        <v-card-subtitle>
+          {{  post.body  }}
+        </v-card-subtitle> 
       </v-card>
     </v-container>
   </v-container>
@@ -84,8 +87,8 @@ export default {
       });
     }
   },
-  computed: {
-    
+  beforeMount() {
+    this.getDocs();
   }
 };
 
