@@ -32,6 +32,16 @@
         </v-card-actions>
       </v-list-item>
     </v-card>
+    <br />
+    <span class="display-2 text-center">Latest Posts</span>
+    <v-btn @click="getDocs">text</v-btn>
+    <v-container v-for="post in posts" :key="post.title">
+      <v-card>
+        <v-card-title>
+          {{  post.title  }}
+        </v-card-title>
+      </v-card>
+    </v-container>
   </v-container>
 </template>
 
@@ -44,14 +54,16 @@ export default {
   data() {
     return {
       post_title: null,
-      post_body: null
+      post_body: null,
+      posts: []
     };
   },
   methods: {
     post: function() {
       fb.db
-        .collection("posts")
+        .collection('posts')
         .add({
+          createdOn: new Date(),
           title: this.post_title,
           body: this.post_body,
           comments_count: 0,
@@ -62,7 +74,23 @@ export default {
         .catch(function(error) {
           alert("Error adding doc: \n" + error);
         });
+    },
+    getDocs: function() {
+      fb.db.collection("posts").get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+          this.posts.unshift(doc.data());
+          //console.log(doc.data().title);
+        })
+      });
     }
+  },
+  computed: {
+    
   }
 };
+
+
+
+//console.log(this.posts);
+
 </script>
