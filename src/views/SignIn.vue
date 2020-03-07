@@ -41,24 +41,25 @@
 </template>
 
 <script>
-const fb = require('../firebase.js');
+const fb = require("../firebase.js");
 
 export default {
   name: "SignIn",
   components: {},
   data() {
     return {
-        email: null,
-        password: null
-    }
+      email: null,
+      password: null
+    };
   },
   methods: {
-    signIn: function () {
-      fb.auth.signInWithEmailAndPassword(this.email, this.password)
+    signIn: function() {
+      fb.auth
+        .signInWithEmailAndPassword(this.email, this.password)
         .catch(function(error) {
-            alert("We found an error\n" + error.code + "\n" + error.message)
-      })
-      this.$router.push('/dashboard');
+          alert("We found an error\n" + error.code + "\n" + error.message);
+        });
+      this.$router.push("/dashboard");
     }
   }
 };

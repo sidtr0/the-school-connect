@@ -67,11 +67,9 @@ export default {
       fb.auth
         .createUserWithEmailAndPassword(this.email, this.password)
         .catch(function(error) {
-          alert(
-            "We found an error\n" + error.code + "\n" + error.message
-          )
+          alert("We found an error\n" + error.code + "\n" + error.message);
         });
-        this.$router.push('/dashboard');
+      this.$router.push("/dashboard");
     }
   }
 };

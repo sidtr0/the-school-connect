@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import "firebase/firestore";
+import store from "./store/index.js";
 
 var firebaseConfig = {
   apiKey: "AIzaSyC6l1Htyhiw5-hALd51SJNKIfRCefaFgw4",
@@ -18,6 +19,10 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 const currentUser = auth.currentUser;
+
+auth.onAuthStateChanged(user => {
+  store.commit("updateUser", { user });
+});
 
 // firebase collections
 const postsCollection = db.collection("posts");

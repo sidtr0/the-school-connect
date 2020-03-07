@@ -39,7 +39,7 @@
 </template>
 
 <script>
-const fb = require('./firebase.js')
+const fb = require("./firebase.js");
 
 export default {
   name: "App",
@@ -51,13 +51,12 @@ export default {
   }),
 
   methods: {
-    signOut: function () {
-      fb.auth.signOut()
-      .catch(function(error) {
+    signOut: function() {
+      fb.auth.signOut().catch(function(error) {
         // An error happened.
         alert("We found an error\n" + error.code + "\n" + error.message);
       });
-      this.$router.push('/')
+      this.$router.push("/");
     }
   }
 };
