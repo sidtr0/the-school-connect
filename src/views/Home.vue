@@ -54,6 +54,38 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12" sm="4">
+        <v-card max-width="400" min-height="150">
+          <v-card-title>
+            <v-icon>mdi-instagram</v-icon>
+          </v-card-title>
+          <v-card-text>
+            Check out our Instagram account at: <a href="https://www.instagram.com/theschoolconnectweb/">@theschoolconnectweb</a>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-card max-width="400" min-height="150">
+          <v-card-title>
+            <v-icon>mdi-twitter</v-icon>
+          </v-card-title>
+          <v-card-text>
+            Check out our Twitter account at: <a href="https://twitter.com/DeSchoolConnect">@DeSchoolConnect</a>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-card max-width="400" min-height="150">
+          <v-card-title>
+            <v-icon>mdi-github</v-icon>
+          </v-card-title>
+          <v-card-text>
+            Contribute to the project at GitHub: <a href="https://github.com/Drac5079/the-school-connect">Drac5079/the-school-connect</a> 
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
