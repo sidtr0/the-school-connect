@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <v-app-bar app class="primary">
-
-      <v-app-bar-nav-icon class="hidden-sm-and-up" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        class="hidden-sm-and-up"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
 
       <v-toolbar-title>
         <router-link to="/">
@@ -51,7 +53,7 @@
         <v-list-item link router @click="signOut">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
-          </v-list-item-icon> 
+          </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>Sign Out</v-list-item-title>
           </v-list-item-content>
@@ -78,7 +80,7 @@ export default {
   components: {},
 
   data: () => ({
-    drawer: false,
+    drawer: false
   }),
 
   methods: {

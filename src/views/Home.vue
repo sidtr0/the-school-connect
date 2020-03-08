@@ -5,16 +5,18 @@
         Welcome to The School Connect.
       </p>
       <br />
-      <p class="text-center display-1">
+      <p class="text-center headline">
         A forum of the students, by the students and for the students.
       </p>
       <br />
       <v-divider></v-divider>
       <br />
       <p class="text-center headline">
-        The School Connect wants to serve as a platform for students all over
-        the world for having discussions, asking for help and interacting with
-        each other.
+        The School Connect wants to serve as a platform for students across the
+        world to have discussions, ask for help and interact with each other.
+        The School Connect has been made to comprehend and utilize the common
+        connect in schools and institutions which bind together people all over
+        the world.
       </p>
     </div>
     <v-divider></v-divider>
@@ -61,7 +63,10 @@
             <v-icon>mdi-instagram</v-icon>
           </v-card-title>
           <v-card-text>
-            Check out our Instagram account at: <a href="https://www.instagram.com/theschoolconnectweb/">@theschoolconnectweb</a>
+            Check out our Instagram account at:
+            <a href="https://www.instagram.com/theschoolconnectweb/"
+              >@theschoolconnectweb</a
+            >
           </v-card-text>
         </v-card>
       </v-col>
@@ -71,7 +76,8 @@
             <v-icon>mdi-twitter</v-icon>
           </v-card-title>
           <v-card-text>
-            Check out our Twitter account at: <a href="https://twitter.com/DeSchoolConnect">@DeSchoolConnect</a>
+            Check out our Twitter account at:
+            <a href="https://twitter.com/DeSchoolConnect">@DeSchoolConnect</a>
           </v-card-text>
         </v-card>
       </v-col>
@@ -81,10 +87,32 @@
             <v-icon>mdi-github</v-icon>
           </v-card-title>
           <v-card-text>
-            Contribute to the project at GitHub: <a href="https://github.com/Drac5079/the-school-connect">Drac5079/the-school-connect</a> 
+            Contribute to the project at GitHub:
+            <a href="https://github.com/Drac5079/the-school-connect"
+              >Drac5079/the-school-connect</a
+            >
           </v-card-text>
         </v-card>
       </v-col>
+    </v-row>
+    <v-row>
+      <v-card>
+        <v-card-title>
+          At The School Connect, we are against bullying.
+        </v-card-title>
+        <v-card-text>
+          We understand that many students all over the world face bullying of
+          various forms that include bullying in real lifeand cyber bullying. If
+          any student here faces any issues, we would be happy to speak with them
+          through the site. Feel free to contact us at
+          theschoolconnect@gmail.com or consult professional. <br />
+          At The School Connect, everyone is allowed to express their views. We
+          assure the freedom to think what you want and be what you are. Please
+          consider seeking help from professional websites as well: <br />
+          ct.counselling.org <br /> youngminds.uk <br /> www.goodtherapy.com <br />
+          www.counsellingsydney.com.au
+        </v-card-text>
+      </v-card>
     </v-row>
   </v-container>
 </template>
