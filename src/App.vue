@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <v-app-bar app class="primary">
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-app-bar-nav-icon class="hidden-sm-and-up" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
         <router-link to="/">
@@ -13,7 +14,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-toolbar-items>
+      <v-toolbar-items class="hidden-xs-only">
         <v-btn router to="/signup" link depressed large class="primary">
           <v-icon left>mdi-traffic-light</v-icon>
           Sign Up
@@ -23,10 +24,40 @@
           Sign In
         </v-btn>
         <v-btn depressed large class="primary" @click="signOut">
+          <v-icon left>mdi-logout</v-icon>
           Sign Out
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" app>
+      <v-list>
+        <v-list-item link router to="/signup">
+          <v-list-item-icon>
+            <v-icon>mdi-traffic-light</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Sign Up</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link router to="/signin">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Sign In</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link router @click="signOut">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon> 
+          <v-list-item-content>
+            <v-list-item-title>Sign Out</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-content>
       <router-view />
@@ -47,7 +78,7 @@ export default {
   components: {},
 
   data: () => ({
-    //
+    drawer: false,
   }),
 
   methods: {
