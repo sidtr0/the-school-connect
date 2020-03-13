@@ -2,7 +2,7 @@
 
 ## Setup
 
-A lot of the project was built on Ubuntu, a Linux distribution but this guide assumes that you have a Windows OS (any version should work), a working browser, command prompt (or terminal) and a knowledge of how directory path works (won't need it much, but still helpful!). Also, a text editor should also be used. I've used Sublime Text for the project. Do note that the screenshots are from Linux but you should hve no trouble following them. 
+A lot of the project was built on Ubuntu, a Linux distribution but this guide assumes that you have a Windows OS (any version should work), a working browser, command prompt (or terminal) and a knowledge of how directory path works (won't need it much, but still helpful!). Also, it'll be a good idea to use a text editor. I've used Sublime Text for the project. Do note that the screenshots are from Linux but you should have no trouble following them. 
 
 Also, install NodeJS on your system which should install NPM automatically. 
 Link to install NodeJS: https://nodejs.org/en/
@@ -111,3 +111,45 @@ the-school-connect
 |+ vue.config.js
 ```
 
+`App.vue` is the main vue file in the entire project. The other vue files are in the folders `components` and `views`.
+
+**Brief explanation on what the folders `components` and `views` actually are.** Views are used to design the pages on the front-end while components are used to design specific components like a navigation bar component. We will not be using much of `components` in the project.
+
+Now we'll clean up the code in all the files in `views` folder and `App.vue` so that it looks pretty much like this:
+
+```
+<template>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      
+    </v-app-bar>
+
+    <v-content>
+
+    </v-content>
+  </v-app>
+</template>
+
+<script>
+
+export default {
+  name: 'App',
+
+  components: {
+    
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
+```
+
+Clean up the other files in the same way.
+
+Now we need to start by creating the navigation bar of the app and work on the router. 
