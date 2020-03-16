@@ -239,5 +239,61 @@ Here's how it looks on a mobile phone device.
 
 **Now that the nav bar is working, we need to create the other important views.**
 
+At this point, go ahead and create the new files in `views` folder.
 
+- `Dashboard.vue`
+- `Home.vue`
+- `SignIn.vue`
+- `SignUp.vue`
+
+After creating these files, go to the folder `router` and inside it `index.js` file. Please don't confuse it with `store/index.js` file.
+
+At the top of the file, import the following newly created files.
+
+```
+import Home from "../views/Home.vue";
+import Dashboard from "../views/Dashboard.vue";
+import SignUp from "../views/SignUp.vue";
+import SignIn from "../views/SignIn.vue";
+```
+
+Next, add the routes to the `routes` array as an object. We are going to making a single page application, which means that the website won't reload everytime a person wants to move to another page. The navigation bar component is the only part of the page along with the footer which won't reload. The rest of the page will reload as per the user's input.
+
+Here's how your routes object should look like after adding the components.
+
+```
+const routes = [
+  {
+    path: "/",
+    name: "Home",
+    component: Home
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/signup",
+    name: "SignUp",
+    component: SignUp
+  },
+  {
+    path: "/signin",
+    name: "SignIn",
+    component: SignIn
+  }
+];
+```
+
+Now that the routing is sorted out, we will need to make the UI of all the new views we just created. We used a bunch of Vuetify components to ease down the process, to give us more freedom saving us from all the unnecessary and extensive coding and also make it look beatiful. The code can be found [here](https://github.com/Drac5079/the-school-connect/tree/master/src/views) and it is really very much similar to HTML. and very intuitive to understand so we won't be going over the logic of everything. 
+
+Great. We are now done with the UI and now, we reach the fun part where we integrate Firebase into the app!
+
+## Firebase
+
+lol bro
 
