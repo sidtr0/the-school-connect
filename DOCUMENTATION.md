@@ -152,4 +152,92 @@ export default {
 
 Clean up the other files in the same way.
 
-Now we need to start by creating the navigation bar of the app and work on the router. 
+Now we need to start by creating the navigation bar of the app and work on the router. We'll need an icon on the left side of the navigation bar with three dashes to indicate the presence of a navigation drawer. Next, we'll need the text which shows us the name of the app. Now, leaving some space in the middle, we'll need a bunch of buttons with various requirements. 
+
+The icon on the left will only be visible if the device is small. The group of buttons on the left will be invisible on smaller devices. We'll be using some CSS helper classes from Vuetify for this.
+
+```
+<!-- App.vue template -->
+
+<v-app-bar app class="primary">
+      <v-app-bar-nav-icon
+        class="hidden-sm-and-up"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+
+      <v-toolbar-title>
+        <router-link to="/">
+          <span class="grey--text text--lighten-2 display-1">THE</span>
+          <span class="black--text text--lighten-2 display-1">SCHOOL</span>
+          <span class="grey--text text--lighten-2 display-1">CONNECT</span>
+        </router-link>
+      </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn router to="/signup" link depressed large class="primary">
+          <v-icon left>mdi-traffic-light</v-icon>
+          Sign Up
+        </v-btn>
+        <v-btn to="/signin" link depressed large class="primary">
+          <v-icon left>mdi-account</v-icon>
+          Sign In
+        </v-btn>
+        <v-btn depressed large class="primary" @click="signOut">
+          <v-icon left>mdi-logout</v-icon>
+          Sign Out
+        </v-btn>
+      </v-toolbar-items>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" app>
+      <v-list>
+        <v-list-item link router to="/signup">
+          <v-list-item-icon>
+            <v-icon>mdi-traffic-light</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Sign Up</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link router to="/signin">
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Sign In</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link router @click="signOut">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Sign Out</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+```
+
+```
+<!-- App.vue data() inside <script> tag -->
+
+data: () => ({
+  drawer: false
+}),
+```
+
+The navigation bar should look sleek now. Here's a picture of it from a desktop browser.
+
+![Nav bar on PC](nav-bar-pc.png)
+
+Here's how it looks on a mobile phone device.
+
+![Nav bar on Mobile](nav-bar-phone.png)
+
+**Now that the nav bar is working, we need to create the other important views.**
+
+
+
