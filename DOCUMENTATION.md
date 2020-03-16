@@ -231,11 +231,11 @@ data: () => ({
 
 The navigation bar should look sleek now. Here's a picture of it from a desktop browser.
 
-![Nav bar on PC](nav-bar-pc.png)
+![Nav bar on PC](images/nav-bar-pc.png)
 
 Here's how it looks on a mobile phone device.
 
-![Nav bar on Mobile](nav-bar-phone.png)
+![Nav bar on Mobile](images/nav-bar-phone.png)
 
 **Now that the nav bar is working, we need to create the other important views.**
 
