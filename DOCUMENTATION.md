@@ -295,5 +295,118 @@ Great. We are now done with the UI and now, we reach the fun part where we integ
 
 ## Firebase
 
-lol bro
+First we need to go to the Firebase console to initialize a new project.
 
+https://console.firebase.google.com
+
+Create a new project by clicking "Add Project". 
+
+![Add a new Firebase project](images/add-firebase-project.png)
+
+Enter the project name. Next, you will be asked to enable Google Analytics which we disabled (for now). 
+
+Click on "Continue". It should take a few moments to load up the project window.
+
+After the page has loaded click on the Web icon to add a web app to the project.
+
+![Add Web App to Firebase project](images/add-web-app.png)
+
+Now you have to register the app. We will set up the hosting in the future.
+
+![Register Web App](register-app.png)
+
+Now you'll be presented with a bunch of code. Copy the code in the JavaScript script tags.
+
+Create a new file called `firebase.js` in your `src` folder.
+
+Now, at the top of the file, import Firebase (we installed it as a dependency in the Getting Started part ) and Vuex store:
+
+```
+import firebase from "firebase";
+import store from "./store/index.js";
+```
+
+Below it, paste the code you copied earlier:
+
+```
+  var firebaseConfig = {
+    apiKey: "", // insert your own apiKey 
+    authDomain: "", // insert your own authDomain 
+    databaseURL: "", // insert your own databaseURL 
+    projectId: "", // insert your own projectId
+    storageBucket: "", // insert your own storageBucket
+    messagingSenderId: "", // insert your own messagingSenderId
+    appId: "" // insert your own appID
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+```
+
+I removed the tokens from the strings because they are sensitive information and need to be protected. Be sure not to post these tokens anywhere on the internet and not to share them with untrusted people.
+
+Now go to your project's console on Firebase and make your way into Firebase Authentication Tab on the right hand side of your screen.
+
+![Firebase Authentication Tab](images/firebase-auth.png)
+
+Click on "Set up sign-in method" and enable Email/Password provider. 
+
+Now, we should enable Firebase's database provder Firestore for storing of posts.
+
+Go to the Database tab 
+
+
+
+
+
+
+
+
+Now we can go to the Firebase Authentication's Users tab. We can now write down the code for Signing Up, Signing In and Signing Out. 
+
+Make your way to `src/views/SignUp.vue` file where we will write our logic for signing up our users.
+
+From the UI's sign up form, we'll bind the variables `username`, `email` and `password`. Their initial values should be `null` (or it can be an empty string, if that's what your prefer) unless updated in the form.
+
+Our `data()` should look like this:
+
+```
+data() {
+  return {
+    username: null,
+    email: null,
+    password: null
+  };
+}
+```
+
+Below it, create an object called `methods` where we will write (you guessed it), our methods for the view.
+
+We already have a button in our form which should trigger a function to sign up the user when clicked. 
+
+```
+<v-btn class="darker" elevation="1" @click="signUp">
+  Sign Up
+</v-btn>
+```
+
+Now, let's write down the `signUp()` function logic inside the `methods` object
+
+```
+methods: {
+  signUp: function() {
+    // console.log(this.username);
+    // console.log(this.email);
+    // console.log(this.password);
+
+    fb.auth
+      .createUserWithEmailAndPassword(this.email, this.password)
+      .catch(function(error) {
+        alert("We found an error\n" + error.code + "\n" + error.message);
+      });
+    this.$router.push("/dashboard");
+  }
+}
+```
+
+We are using `this` to refer to the parent object we are using which has the three variables `username`, `email` and `password`. The commented out `console.log()` statements are only for debugging purposes.
