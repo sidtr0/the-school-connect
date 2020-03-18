@@ -289,15 +289,46 @@ const routes = [
 ];
 ```
 
-Now that the routing is sorted out, we will need to make the UI of all the new views we just created. We used a bunch of Vuetify components to ease down the process, to give us more freedom saving us from all the unnecessary and extensive coding and also make it look beatiful. The code can be found [here](https://github.com/Drac5079/the-school-connect/tree/master/src/views) and it is really very much similar to HTML. and very intuitive to understand so we won't be going over the logic of everything. 
+Now that the routing is sorted out, we will need to make the UI of all the new views we just created. We used a bunch of Vuetify components to ease down the process, to give us more freedom saving us from all the unnecessary and extensive coding and also make it look beatiful. The code can be found [here](https://github.com/Drac5079/the-school-connect/tree/master/src/views) and it is really very much similar to HTML and very intuitive to understand so we won't be going over the logic of everything. 
 
 Great. We are now done with the UI and now, we reach the fun part where we integrate Firebase into the app!
+
+## Vuex Store
+
+Now we'll have to work on the Vuex store found in `src/store/index.js`.
+
+Update the file with following lines of code:
+
+```
+import Vue from "vue";
+import Vuex from "vuex";
+
+Vue.use(Vuex);
+
+export const store = new Vuex.Store({
+  state: {
+    user: null,
+    posts: []
+  },
+  mutations: {
+    updateUser(state, { user }) {
+      Vue.set(state, "user", user);
+    }
+  },
+  getter: {
+    user: state => state.user
+  },
+  actions: {}
+});
+```
+
+This should help in the authentication process.
 
 ## Firebase
 
 First we need to go to the Firebase console to initialize a new project.
 
-https://console.firebase.google.com
+https://console.firebase.google.com/
 
 Create a new project by clicking "Add Project". 
 
@@ -313,7 +344,7 @@ After the page has loaded click on the Web icon to add a web app to the project.
 
 Now you have to register the app. We will set up the hosting in the future.
 
-![Register Web App](register-app.png)
+![Register Web App](images/register-app.png)
 
 Now you'll be presented with a bunch of code. Copy the code in the JavaScript script tags.
 
@@ -353,18 +384,65 @@ Click on "Set up sign-in method" and enable Email/Password provider.
 
 Now, we should enable Firebase's database provder Firestore for storing of posts.
 
-Go to the Database tab 
+Go to the Database tab. Firebase has two types of databases - Realtime Database or Firestore. We had to make a decision here and went with Firestore, a better version of Realtime Database. The both are NoSQL databases and save data in JSON formats.
 
+Now you can enable the Firestore Database.
 
+Click on Create Database.
 
+Here, we will start in production mode.
 
+![Start in production mode](images/start-in-production.png)
 
+Next, select the cloud location. This is a crucial step and it cannot be changed in the future. Server latency depends on this location and location of client. 
 
+We chose `asia-east2` for this project. Click Done. It should take a few moments to provision the Database and set up security rules. After it is done, you'll be able to see the blank database.
 
+![Blank database](images/blank-database.png)
+
+Before we go into programming, we'll need to modify the database a little bit to act as a reference point for the code and a way of underdstanding the database for us humans.
+
+Click on start collection and give it a name. We will call it `posts`. This `posts` collection should act as a reference to the code. Now, inside the `posts` collection, make a new document to act as a reference for the programmers. Here's how it should look:
+
+![Sample Document](images/sample-document.png)
+
+We will delete it later but let's keep it for now.
+
+Now, we will complete the entire code of `firebase.js` file.
+
+Below your Firebase initialisation, add these lines of code:
+
+```
+// firebase utils
+const db = firebase.firestore();
+const auth = firebase.auth();
+const currentUser = auth.currentUser;
+
+auth.onAuthStateChanged(user => {
+  store.commit("updateUser", { user });
+});
+
+// firebase collections
+const postsCollection = db.collection("posts");
+
+export { db, auth, currentUser, postsCollection };
+```
+
+`db`, `auth`, and `currentUser` are all variables depending on the Firebase API.
+
+the `onAuthStateChanged` event listener is used to listen to any change in Authentication events and if there is any change, it will update the Vuex store.
+
+The `postsCollection` constant is the place where our sample document is stored and where all the new posts will be stored when the user/client creates a new one.
 
 Now we can go to the Firebase Authentication's Users tab. We can now write down the code for Signing Up, Signing In and Signing Out. 
 
 Make your way to `src/views/SignUp.vue` file where we will write our logic for signing up our users.
+
+You'll need to import the `firebase.js` file as well.
+
+```
+const fb = require("../firebase.js");
+```
 
 From the UI's sign up form, we'll bind the variables `username`, `email` and `password`. Their initial values should be `null` (or it can be an empty string, if that's what your prefer) unless updated in the form.
 
@@ -410,3 +488,91 @@ methods: {
 ```
 
 We are using `this` to refer to the parent object we are using which has the three variables `username`, `email` and `password`. The commented out `console.log()` statements are only for debugging purposes.
+
+`createUserWithEmailAndPassword()` is a function which, you guessed it, creates a new user using the email and password credentials. 
+
+`this.$router.push("/dashboard")` is self-explanatory line which takes the user to the dashboard page.
+
+Now we can create our sign in logic in `SignIn.vue`. It is similar to the sign up feature.
+
+It needs the email ID and password so we get it in the same way we got it earlier. I will only write down the logic here.
+
+```
+  methods: {
+    signIn: function() {
+      fb.auth
+        .signInWithEmailAndPassword(this.email, this.password)
+        .catch(function(error) {
+          alert("We found an error\n" + error.code + "\n" + error.message);
+        });
+      this.$router.push("/dashboard");
+    }
+  }
+```
+
+It works in the same way the sign up function works so there is also no need for explanation. 
+
+Now, we need to add the feature where the user can create a new post.
+
+We'll go to `src/views/Dashboard.vue`.
+
+Just like the previous sign up and sign in components, this will also require some things from the UI so we will bind them the same way we did earlier. 
+
+Then we will get the `posts` document reference from our Firestore database and push a new document in it. 
+
+Inside, the methods object, do this:
+
+```
+post: function() {
+      fb.db
+        .collection("posts")
+        .add({
+          createdOn: new Date(),
+          title: this.post_title,
+          body: this.post_body,
+          comments_count: 0,
+          likes_count: 0,
+          comments: [],
+          author: this.author
+        })
+        .then(function() {
+          location.reload();
+        })
+        .catch(function(error) {
+          alert("Error adding doc: \n" + error);
+        });
+    },
+```
+
+This will add a new document is the database.
+
+Now for the post rendering.
+
+We'll create a function to fetch all posts and then call the function as and when the page loads.
+
+Here's the function, again inside the methods object.
+
+```
+getDocs: function() {
+      fb.db
+        .collection("posts")
+        .get()
+        .then(snapshot => {
+          snapshot.docs.forEach(doc => {
+            this.posts.unshift(doc.data());
+            //console.log(doc.data().title);
+          });
+        });
+    }
+```
+
+The function won't be called though. How do we call it as and when the page loads? VueJS has a simple helper function, thankfully. It's called 'beforeMount()'. Here's how to use it.
+
+```
+beforeMount() {
+  this.getDocs();
+}
+```
+
+
+
